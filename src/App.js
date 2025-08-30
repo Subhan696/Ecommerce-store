@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useDispatch } from 'react-redux';
-import { loadCartFromStorage } from './features/cart/cartSlice';
+import { loadCart } from './features/cart/cartSlice';
 import { selectIsAuthenticated } from './features/auth/authSlice';
 
 // Layout
@@ -82,33 +82,31 @@ const theme = createTheme({
 
 function App() {
   const dispatch = useDispatch();
-  const isAuthenticated = selectIsAuthenticated();
+  const isAuthenticated = false; // Temporarily hardcoded until auth is properly set up
 
   // Load cart from localStorage on initial render
   useEffect(() => {
-    dispatch(loadCartFromStorage());
+    // Load cart is now handled in store.js
   }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <MainLayout>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="products" element={<ProductsPage />} />
-            <Route path="products/:id" element={<ProductDetailPage />} />
-            <Route path="cart" element={<CartPage />} />
-            <Route path="checkout" element={<CheckoutPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
-            <Route path="profile" element={isAuthenticated ? <ProfilePage /> : <LoginPage />} />
-            <Route path="orders" element={isAuthenticated ? <OrdersPage /> : <LoginPage />} />
-            <Route path="orders/:orderId" element={isAuthenticated ? <OrderDetailPage /> : <LoginPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/profile" element={isAuthenticated ? <ProfilePage /> : <LoginPage />} />
+          <Route path="/orders" element={isAuthenticated ? <OrdersPage /> : <LoginPage />} />
+          <Route path="/orders/:id" element={isAuthenticated ? <OrderDetailPage /> : <LoginPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </Router>
+      </MainLayout>
     </ThemeProvider>
   );
 }

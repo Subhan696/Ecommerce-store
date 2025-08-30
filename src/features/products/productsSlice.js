@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useGetProductsQuery } from '../../app/api/apiSlice';
 
 const initialState = {
-  products: [],
-  status: 'idle',
-  error: null,
   filters: {
     category: 'all',
     sortBy: 'featured',
@@ -25,29 +21,6 @@ const productsSlice = createSlice({
     setSearchQuery: (state, action) => {
       state.filters.searchQuery = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addMatcher(
-        useGetProductsQuery.matchPending,
-        (state) => {
-          state.status = 'loading';
-        }
-      )
-      .addMatcher(
-        useGetProductsQuery.fulfilled,
-        (state, action) => {
-          state.status = 'succeeded';
-          state.products = action.payload;
-        }
-      )
-      .addMatcher(
-        useGetProductsQuery.rejected,
-        (state, action) => {
-          state.status = 'failed';
-          state.error = action.error.message;
-        }
-      );
   },
 });
 

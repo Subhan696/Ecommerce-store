@@ -37,7 +37,8 @@ import {
   Sort as SortIcon,
   Search as SearchIcon,
 } from '@mui/icons-material';
-import { addToCart } from '../features/cart/cartSlice';
+import { addItemToCart } from '../features/cart/cartSlice';
+import { IconButton } from '@mui/material';
 import { useGetProductsQuery, useGetCategoriesQuery } from '../app/api/apiSlice';
 import { setCategoryFilter, setSortBy, setSearchQuery } from '../features/products/productsSlice';
 
@@ -176,7 +177,7 @@ export default function ProductsPage() {
   
   // Handle add to cart
   const handleAddToCart = (product) => {
-    dispatch(addToCart({
+    dispatch(addItemToCart({
       id: product.id,
       title: product.title,
       price: product.price,

@@ -28,7 +28,7 @@ import {
   ArrowBack as ArrowBackIcon,
   Star as StarIcon,
 } from '@mui/icons-material';
-import { addToCart } from '../features/cart/cartSlice';
+import { addItemToCart } from '../features/cart/cartSlice';
 import { useGetProductQuery } from '../app/api/apiSlice';
 
 function TabPanel(props) {
@@ -91,11 +91,11 @@ export default function ProductDetailPage() {
     if (!product) return;
     
     dispatch(
-      addToCart({
+      addItemToCart({
         id: product.id,
         title: product.title,
         price: product.price,
-        image: product.image,
+        image: product.images[0],
         quantity: quantity,
       })
     );

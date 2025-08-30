@@ -19,7 +19,8 @@ import {
   Menu as MenuIcon,
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
-import { selectCartTotalQuantity, selectIsAuthenticated, selectCurrentUser } from '../../features/auth/authSlice';
+import { selectIsAuthenticated, selectCurrentUser } from '../../features/auth/authSlice';
+import { selectCartTotalQuantity } from '../../features/cart/cartSlice';
 
 const pages = [
   { title: 'Home', path: '/' },

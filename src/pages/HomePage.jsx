@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useGetProductsQuery } from '../app/api/apiSlice';
-import { addToCart } from '../features/cart/cartSlice';
+import { addItemToCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 
 export default function HomePage() {
@@ -24,7 +24,7 @@ export default function HomePage() {
   const featuredProducts = products.slice(0, 4);
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart({
+    dispatch(addItemToCart({
       id: product.id,
       title: product.title,
       price: product.price,

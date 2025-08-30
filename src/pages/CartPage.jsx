@@ -37,9 +37,9 @@ import {
   ArrowBack as ArrowBackIcon,
 } from '@mui/icons-material';
 import { 
-  addToCart, 
-  removeFromCart, 
-  deleteFromCart, 
+  addItemToCart, 
+  removeItemFromCart, 
+  deleteItemFromCart, 
   selectCartItems, 
   selectCartTotalAmount, 
   selectCartTotalQuantity 
@@ -95,7 +95,7 @@ export default function CartPage() {
     if (newQuantity > 10) return; // Limit max quantity to 10
     
     dispatch(
-      addToCart({
+      addItemToCart({
         id: item.id,
         title: item.title,
         price: item.price,
@@ -107,12 +107,12 @@ export default function CartPage() {
   
   // Handle remove item (decrease quantity by 1)
   const handleRemoveItem = (item) => {
-    dispatch(removeFromCart(item.id));
+    dispatch(removeItemFromCart(item.id));
   };
   
   // Handle delete item (remove from cart completely)
   const handleDeleteItem = (itemId) => {
-    dispatch(deleteFromCart(itemId));
+    dispatch(deleteItemFromCart(itemId));
   };
   
   // Handle apply coupon
